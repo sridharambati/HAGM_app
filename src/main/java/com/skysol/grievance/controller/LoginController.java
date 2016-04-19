@@ -25,15 +25,23 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value="/")
-	public ModelAndView loginPage(){
+	/*@RequestMapping(value="/")
+	public String loginPage(){
+		if(logger.isDebugEnabled()){
+			logger.debug("=== login requested ===");
+		}
+		return "redirect:/loginPage";
+	}*/
+	
+	@RequestMapping(value="/", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView login(){
 		if(logger.isDebugEnabled()){
 			logger.debug("=== login requested ===");
 		}
 		return new ModelAndView("login");
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView loginPage(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		if(logger.isInfoEnabled()){
@@ -53,18 +61,26 @@ public class LoginController {
 						model = new ModelAndView("welcome");
 						model.addObject("user", user);
 					}else{
-						throw new CustomGenericException(ErrorConstants.ERR_001, "Invalid User!!");
+//						throw new CustomGenericException(ErrorConstants.ERR_001, "Invalid User!!");
+						model = new ModelAndView("error");
+						model.addObject("errMsg", "Invalid User!!");
 					}
 				}else{
-					throw new CustomGenericException(ErrorConstants.ERR_001, "User Not Found!!");
+//					throw new CustomGenericException(ErrorConstants.ERR_001, "User Not Found!!");
+					model = new ModelAndView("error");
+					model.addObject("errMsg", "User Not Found!!");
 				}
 				
 			}else{
-				throw new CustomGenericException(ErrorConstants.ERR_002, "This is custom message");
+//				throw new CustomGenericException(ErrorConstants.ERR_002, "This is custom message");
+				model = new ModelAndView("error");
+				model.addObject("errMsg", "Username and Password should not empty!!");
 			}
 		} catch (Exception e) {
 			logger.error("Exception occured==", e);
-			throw new CustomGenericException(ErrorConstants.ERR_003, "This is System Error");
+			model = new ModelAndView("error");
+			model.addObject("errMsg", e.getMessage());
+//			throw new CustomGenericException(ErrorConstants.ERR_003, "This is System Error");
 		}
 		return model;
 	}

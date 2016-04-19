@@ -3,8 +3,8 @@ package com.skysol.grievance.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @ComponentScan(basePackages="com.skysol.grievance")
 @EnableWebMvc
+@Import({ SecurityConfiguration.class })
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
 	@Bean
@@ -29,10 +30,10 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 
-	@Override
+	/*@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 	    configurer.enable();
-	}
+	}*/
 	
 	/* @Bean(name="simpleMappingExceptionResolver")
 	    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
