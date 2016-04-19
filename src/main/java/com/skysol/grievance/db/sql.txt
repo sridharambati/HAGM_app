@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS hagm_schema; 
+
+CREATE TABLE hagm_schema.user (                                                                         
+          `id` bigint(20) NOT NULL AUTO_INCREMENT,                                                    
+          `emailAddress` varchar(255) DEFAULT NULL,                                                   
+          `lastAccessTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  
+          `username` varchar(255) DEFAULT NULL,                                                     
+          `password` varchar(255) DEFAULT NULL,                                                       
+	  PRIMARY KEY (`id`)                                                                          
+        ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+INSERT INTO hagm_schema.user VALUES ('1','skysol@gmail.com',null,'skysol','sky1234');
+
+SELECT * FROM hagm_schema.user; 
