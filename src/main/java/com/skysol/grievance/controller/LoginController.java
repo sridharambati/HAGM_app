@@ -25,27 +25,19 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	/*@RequestMapping(value="/")
-	public String loginPage(){
-		if(logger.isDebugEnabled()){
-			logger.debug("=== login requested ===");
-		}
-		return "redirect:/loginPage";
-	}*/
-	
-	@RequestMapping(value="/", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView login(){
-		if(logger.isDebugEnabled()){
-			logger.debug("=== login requested ===");
+	@RequestMapping(value="/")
+	public ModelAndView loginPage(){
+		if(logger.isInfoEnabled()){
+			logger.info("=== login requested ===" );
 		}
 		return new ModelAndView("login");
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView loginPage(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 		if(logger.isInfoEnabled()){
-			logger.info("=== loginPage started ===" );
+			logger.info("=== loginPage started LoginController ===" );
 		}
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
@@ -61,18 +53,15 @@ public class LoginController {
 						model = new ModelAndView("welcome");
 						model.addObject("user", user);
 					}else{
-//						throw new CustomGenericException(ErrorConstants.ERR_001, "Invalid User!!");
 						model = new ModelAndView("error");
 						model.addObject("errMsg", "Invalid User!!");
 					}
 				}else{
-//					throw new CustomGenericException(ErrorConstants.ERR_001, "User Not Found!!");
 					model = new ModelAndView("error");
 					model.addObject("errMsg", "User Not Found!!");
 				}
 				
 			}else{
-//				throw new CustomGenericException(ErrorConstants.ERR_002, "This is custom message");
 				model = new ModelAndView("error");
 				model.addObject("errMsg", "Username and Password should not empty!!");
 			}
@@ -80,13 +69,20 @@ public class LoginController {
 			logger.error("Exception occured==", e);
 			model = new ModelAndView("error");
 			model.addObject("errMsg", e.getMessage());
-//			throw new CustomGenericException(ErrorConstants.ERR_003, "This is System Error");
+		}
+		
+		if(logger.isInfoEnabled()){
+			logger.info("=== End of login method in LoginController ===" );
 		}
 		return model;
+		
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+		if(logger.isInfoEnabled()){
+			logger.info("=== logout requested ===" );
+		}
 		return "login";
 	}
 

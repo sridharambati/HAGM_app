@@ -1,5 +1,6 @@
 package com.skysol.grievance.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @Import({ SecurityConfiguration.class })
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
+	final static Logger logger = Logger.getLogger(MvcConfiguration.class);
 
 	@Bean
 	public ViewResolver getViewResolver(){
+		if(logger.isInfoEnabled()){
+			logger.info("=== MvcConfiguration ViewResolver ===" );
+		}
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
@@ -26,28 +31,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		if(logger.isInfoEnabled()){
+			logger.info("=== MvcConfiguration addResourceHandlers ===" );
+		}
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 		registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
-
-	/*@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-	    configurer.enable();
-	}*/
-	
-	/* @Bean(name="simpleMappingExceptionResolver")
-	    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-	        SimpleMappingExceptionResolver r =
-	              new SimpleMappingExceptionResolver();
-
-	        Properties mappings = new Properties();
-	        mappings.setProperty("CustomGenericException", "error");
-
-	        r.setExceptionMappings(mappings);  // None by default
-	        r.setDefaultErrorView("error");    // No default
-	        r.setExceptionAttribute("ex");     // Default is "exception"
-//	        r.setWarnLogCategory("example.MvcLogger");     // No default
-	        return r;
-	    }*/
 	
 }

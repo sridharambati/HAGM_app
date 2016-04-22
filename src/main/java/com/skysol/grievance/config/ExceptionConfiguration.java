@@ -2,6 +2,7 @@ package com.skysol.grievance.config;
 
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,18 +19,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class ExceptionConfiguration extends WebMvcConfigurerAdapter{
 
-	
-	
+		final static Logger logger = Logger.getLogger(ExceptionConfiguration.class);
 
-	/*@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-	    configurer.enable();
-	}*/
-	
-//	 	@Bean(name="simpleMappingExceptionResolver")
 		@Bean
 	    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-	        SimpleMappingExceptionResolver r =
+			if(logger.isInfoEnabled()){
+				logger.info("=== createSimpleMappingExceptionResolver method starts ===" );
+			}
+			SimpleMappingExceptionResolver r =
 	              new SimpleMappingExceptionResolver();
 
 	        Properties mappings = new Properties();
@@ -39,6 +36,9 @@ public class ExceptionConfiguration extends WebMvcConfigurerAdapter{
 	        r.setDefaultErrorView("error");    // No default
 	        r.setExceptionAttribute("ex");     // Default is "exception"
 //	        r.setWarnLogCategory("example.MvcLogger");     // No default
+	        if(logger.isInfoEnabled()){
+				logger.info("=== createSimpleMappingExceptionResolver method Ends ===" );
+			}
 	        return r;
 	    }
 	

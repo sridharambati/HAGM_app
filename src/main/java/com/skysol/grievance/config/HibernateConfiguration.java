@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,20 +23,31 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
 
-    @Autowired
+	final static Logger logger = Logger.getLogger(HibernateConfiguration.class);
+
+	@Autowired
     private Environment environment;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
+    	if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration sessionFactory Starts ===" );
+		}
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] { "com.skysol.grievance.model" });
         sessionFactory.setHibernateProperties(hibernateProperties());
+        if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration sessionFactory Ends ===" );
+		}
         return sessionFactory;
      }
 	
     @Bean
     public DataSource dataSource() {
+    	if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration dataSource method ===" );
+		}
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
@@ -45,6 +57,9 @@ public class HibernateConfiguration {
     }
     
     private Properties hibernateProperties() {
+    	if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration hibernateProperties method ===" );
+		}
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
@@ -55,8 +70,14 @@ public class HibernateConfiguration {
 	@Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory s) {
-       HibernateTransactionManager txManager = new HibernateTransactionManager();
+		if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration transactionManager Starts ===" );
+		}
+		HibernateTransactionManager txManager = new HibernateTransactionManager();
        txManager.setSessionFactory(s);
+       if(logger.isInfoEnabled()){
+			logger.info("=== HibernateConfiguration transactionManager Ends ===" );
+		}
        return txManager;
     }
 }
