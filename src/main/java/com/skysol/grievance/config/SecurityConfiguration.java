@@ -20,38 +20,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	final static Logger logger = Logger.getLogger(SecurityConfiguration.class);
 	
 	@Autowired
+    CustomSuccessHandler customSuccessHandler;
+	
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		if(logger.isDebugEnabled()){
-			logger.debug("=== SecurityConfiguration configureGlobal ===");
+			logger.debug("=== SecurityConfiguration configureGlobal Starts ===");
 		}
 		auth.inMemoryAuthentication()
 		.withUser("skysol").password("123456").roles("USER");
+		
+		if(logger.isDebugEnabled()){
+			logger.debug("=== SecurityConfiguration configureGlobal Ends ===");
+		}
 		
 	}
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		if(logger.isDebugEnabled()){
-			logger.debug("=== SecurityConfiguration configure ===");
+			logger.debug("=== SecurityConfiguration configure Starts ===");
 		}
 		httpSecurity
-		.formLogin().loginPage("/login")
+		.authorizeRequests()
+		//.antMatchers("/login*").access("hasRole('USER')")
+		.antMatchers("/").permitAll()
+		 .and()
+		.formLogin().loginPage("/login").successHandler(customSuccessHandler)
         .usernameParameter("username").passwordParameter("password")
-        .and()
-        .authorizeRequests()
-//        .antMatchers("/").permitAll()
-       // .anyRequest().hasRole("USER");
-		.antMatchers(HttpMethod.POST,"/login").access("hasRole('USER')");
-//		.antMatchers("/").permitAll()
-		//.anyRequest().authenticated()
-             
-           // .and().logout();
-       // .and().csrf();
-		
-		/*httpSecurity.requiresChannel().anyRequest().requiresSecure()
-		.and().authorizeRequests()
-		.antMatchers("/auth/**", "/login", "/signup", "/forgotPassword").permitAll()
-		.anyRequest().hasAnyRole("ANONYMOUS, USER");*/
-             
+		.and().csrf();
+        //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+		if(logger.isDebugEnabled()){
+			logger.debug("=== SecurityConfiguration configure Ends ===");
+		}
 	}
 }
