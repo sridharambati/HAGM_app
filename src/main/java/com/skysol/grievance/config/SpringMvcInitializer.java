@@ -12,7 +12,7 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 		if(logger.isInfoEnabled()){
 			logger.info("=== SpringMvcInitializer getRootConfigClasses ===" );
 		}
-		return new Class[] { MvcConfiguration.class};
+		return new Class[] { MvcConfiguration.class, MongodbConfiguration.class};
 	}
  
 	@Override

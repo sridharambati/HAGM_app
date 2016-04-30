@@ -1,11 +1,20 @@
 package com.skysol.grievance.service;
 
+import java.util.List;
+
 import com.skysol.grievance.model.User;
 
 public interface UserService {
 
-	User findById(int id);
+	public User findById(int id);
 	
-	User findByUser(String userName);
+	public User findByUser(String userName);
+	
+	public User findByUserName(String userName);
+	
+	public boolean saveUser();
+	
+	public List<User> getUser();
+	
 	
 }

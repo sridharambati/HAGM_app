@@ -1,6 +1,10 @@
 package com.skysol.grievance.controller;
 
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.skysol.grievance.constants.ErrorConstants;
-import com.skysol.grievance.exception.CustomGenericException;
 import com.skysol.grievance.model.User;
 import com.skysol.grievance.service.UserService;
 import com.skysol.grievance.utilities.StringUtils;
@@ -24,13 +26,13 @@ public class LoginController {
 	
 	@Autowired
 	private UserService userService;
-
+	
 	@RequestMapping(value="/")
 	public ModelAndView loginPage(){
 		if(logger.isInfoEnabled()){
 			logger.info("=== login requested ===" );
 		}
-		return new ModelAndView("login");
+		return new ModelAndView("UserManagement");
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -41,11 +43,13 @@ public class LoginController {
 		}
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
+//		String username="skysol";
+//		String password="sky1234";
 		ModelAndView model = null;
 		User user = null;
 		try {
-			if(StringUtils.isValidString(username) 
-					&& StringUtils.isValidString(password)){
+			if(StringUtils.isValidString(username)  
+					&&  StringUtils.isValidString(password)){
 				user = userService.findByUser(username);
 				if(user != null){
 					if(username.equalsIgnoreCase(user.getUsername())
@@ -63,7 +67,7 @@ public class LoginController {
 				
 			}else{
 				model = new ModelAndView("error");
-				model.addObject("errMsg", "Username and Password should not empty!!");
+				model.addObject("errMsg", "Username and Password should not be empty!!");
 			}
 		} catch (Exception e) {
 			logger.error("Exception occured==", e);
@@ -86,4 +90,32 @@ public class LoginController {
 		return "login";
 	}
 
+	@PostConstruct
+	public void initIt() throws Exception {
+		if(logger.isInfoEnabled()){
+			logger.info("=== initIt method ===" );
+		}
+		// mongodb services sample calling code 
+		/*try {
+			userService.saveUser();
+			List<User> users = userService.getUser();
+			for (User user : users) {
+				if(logger.isInfoEnabled()){
+					logger.info("=== user name ===" + user.getUsername());
+					logger.info("=== password ===" + user.getPassword());
+					logger.info("=== email id ===" + user.getEmailAddress());
+				}
+			}
+		} catch (Exception e) {
+			logger.error("Exception occured while saving or retrving user details in to Mongodb==", e);
+		}*/
+		
+	}
+	
+	@PreDestroy
+	public void cleanUp() throws Exception {
+		if(logger.isInfoEnabled()){
+			logger.info("=== cleanup method ===" );
+		}
+	}
 }

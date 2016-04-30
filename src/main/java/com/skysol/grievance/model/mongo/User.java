@@ -1,27 +1,18 @@
-package com.skysol.grievance.model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+package com.skysol.grievance.model.mongo;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name="USER")
+@Document
 public class User {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	private int id;
 
-	@Column(name="username", unique=true, nullable=false)
 	private String username;
 	
-	@Column(name="password", nullable=false)
 	private String password;
 		
-	@Column(name="emailAddress", nullable=false)
 	private String emailAddress;
 	
 
