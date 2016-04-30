@@ -5,11 +5,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.skysol.grievance.dao.UserDao;
-import com.skysol.grievance.dao.UserDaoImpl;
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 
 @Service("userService")
 public class UserServiceImpl implements UserService{
@@ -44,9 +43,9 @@ public class UserServiceImpl implements UserService{
 		if(logger.isInfoEnabled()){
 			logger.info("=== UserServiceImpl saveUser start===" );
 		}
-		User user = null;
+		UserRepo user = null;
 		try{
-			user = new User();
+			user = new UserRepo();
 			user.setId(new Integer(1));
 			user.setUsername("skysol");
 			user.setPassword("sky1234");
@@ -60,11 +59,11 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 	
-	public List<User> getUser(){
+	public List<UserRepo> getUser(){
 		if(logger.isInfoEnabled()){
 			logger.info("=== UserDaoImpl getUser start ===");
 		}
-		List<User> user=null;
+		List<UserRepo> user=null;
 		try{
 			 user=dao.getUser();
 		}catch(Exception ex){

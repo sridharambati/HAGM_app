@@ -3,6 +3,7 @@ package com.skysol.grievance.dao;
 import java.util.List;
 
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 
 public interface UserDao {
 
@@ -10,11 +11,9 @@ public interface UserDao {
 	
 	public User findByUser(String sso);
 	
-	public User findByUserName(String userName);
+	public boolean saveUser(UserRepo user);
 	
-	public boolean saveUser(User user);
-	
-	public List<User> getUser();
+	public List<UserRepo> getUser();
 	
 }
 

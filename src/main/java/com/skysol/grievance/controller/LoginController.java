@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 import com.skysol.grievance.service.UserService;
 import com.skysol.grievance.utilities.StringUtils;
 
@@ -98,8 +99,8 @@ public class LoginController {
 		// mongodb services sample calling code 
 		/*try {
 			userService.saveUser();
-			List<User> users = userService.getUser();
-			for (User user : users) {
+			List<UserRepo> users = userService.getUser();
+			for (UserRepo user : users) {
 				if(logger.isInfoEnabled()){
 					logger.info("=== user name ===" + user.getUsername());
 					logger.info("=== password ===" + user.getPassword());

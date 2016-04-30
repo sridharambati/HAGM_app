@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
@@ -37,16 +38,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		return user;
 	}
 	
-	public User findByUserName(String userName) {
-		if(logger.isInfoEnabled()){
-			logger.info("=== UserDaoImpl findByUserName ===" );
-		}
-		User user=null;
-		
-		return user;
-	}
-	
-	public boolean saveUser(User user){
+	public boolean saveUser(UserRepo user){
 		try{
 			mongoTemplate.insert(user,USER_COLLECTION);
 			return true;
@@ -58,10 +50,10 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		}
 	}
 	
-	public List<User> getUser(){
-		List<User> user=null;
+	public List<UserRepo> getUser(){
+		List<UserRepo> user=null;
 		try{
-			 user=mongoTemplate.findAll(User.class, USER_COLLECTION);
+			 user=mongoTemplate.findAll(UserRepo.class, USER_COLLECTION);
 		}catch(Exception ex){
 			if(logger.isInfoEnabled()){
 				logger.info("=== UserDaoImpl saveUser ===",ex );

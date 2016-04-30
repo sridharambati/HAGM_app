@@ -3,6 +3,7 @@ package com.skysol.grievance.service;
 import java.util.List;
 
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 
 public interface UserService {
 
@@ -14,7 +15,7 @@ public interface UserService {
 	
 	public boolean saveUser();
 	
-	public List<User> getUser();
+	public List<UserRepo> getUser();
 	
 	
 }
