@@ -21,6 +21,7 @@
     </head>
     <body>
     <div>
+    <form action="/grievance" method="post" class="form-horizontal">
      <div ng-controller="myController">
          <table width="100%" border="0" cellpadding="0" cellspacing="0">
              <tr>
@@ -65,14 +66,22 @@
                     <img src="/static/images/submit.png"/> 
                 <p> submit for a new grievance</p> 
                     <img src="/static/images/start.png"/>
-                
+                <div class="form-actions">
+								<input type="button" name="submit"
+									class="btn btn-block btn-primary btn-default" value="Submit">
+							</div>
                 </div>
                 <div id="track" ng-controller="myController">
                     <h3> Track Grievance</h3>
                     <img src="/static/images/notes.png"/>
                     <p> View the Grievance list</p>
                     <img src="/static/images/track.png"/>
+                    <div class="form-actions">
+								<input type="button" name="submit"
+									class="btn btn-block btn-primary btn-default" value="Track">
+							</div>
                 </div>
+                </form>
             </div>
         
     </body>
