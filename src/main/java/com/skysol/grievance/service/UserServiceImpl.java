@@ -2,15 +2,18 @@ package com.skysol.grievance.service;
 
 import java.util.List;
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.skysol.grievance.dao.UserDao;
 import com.skysol.grievance.model.User;
 import com.skysol.grievance.model.mongo.UserRepo;
 
 @Service("userService")
+@Transactional
 public class UserServiceImpl implements UserService{
 
 	final static Logger logger = Logger.getLogger(UserServiceImpl.class);

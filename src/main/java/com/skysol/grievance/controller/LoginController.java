@@ -1,8 +1,6 @@
 package com.skysol.grievance.controller;
 
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skysol.grievance.model.User;
-import com.skysol.grievance.model.mongo.UserRepo;
 import com.skysol.grievance.service.UserService;
 import com.skysol.grievance.utilities.StringUtils;
 
@@ -33,7 +30,7 @@ public class LoginController {
 		if(logger.isInfoEnabled()){
 			logger.info("=== login requested ===" );
 		}
-		return new ModelAndView("UserManagement");
+		return new ModelAndView("login");
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -44,8 +41,8 @@ public class LoginController {
 		}
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-//		String username="skysol";
-//		String password="sky1234";
+//		username="skysol";
+//		password="sky1234";
 		ModelAndView model = null;
 		User user = null;
 		try {
@@ -55,7 +52,7 @@ public class LoginController {
 				if(user != null){
 					if(username.equalsIgnoreCase(user.getUsername())
 							&& password.equalsIgnoreCase(user.getPassword())){
-						model = new ModelAndView("welcome");
+						model = new ModelAndView("index");
 						model.addObject("user", user);
 					}else{
 						model = new ModelAndView("error");
