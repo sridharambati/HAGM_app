@@ -1,5 +1,7 @@
 package com.skysol.grievance.config;
 
+import javax.servlet.Filter;
+
 import org.apache.log4j.Logger;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -26,6 +28,15 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 			logger.info("=== SpringMvcInitializer getServletMappings ===" );
 		}
 		return new String[] { "/" };
+	}
+	
+	@Override
+    protected Filter[] getServletFilters() {
+		if(logger.isInfoEnabled()){
+			logger.info("=== SpringMvcInitializer getServletFilters ===" );
+		}
+    	Filter [] singleton = { new HAGMRSFilter() };
+    	return singleton;
 	}
 
 }

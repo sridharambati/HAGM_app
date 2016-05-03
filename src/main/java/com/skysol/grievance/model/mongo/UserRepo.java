@@ -65,9 +65,9 @@ public class UserRepo {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof User))
+		if (!(obj instanceof UserRepo))
 			return false;
-		User other = (User) obj;
+		UserRepo other = (UserRepo) obj;
 		if (id != other.id)
 			return false;
 		if (username == null) {

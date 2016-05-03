@@ -1,6 +1,8 @@
 package com.skysol.grievance.controller;
 
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -8,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skysol.grievance.model.User;
+import com.skysol.grievance.model.mongo.UserRepo;
 import com.skysol.grievance.service.UserService;
 import com.skysol.grievance.utilities.StringUtils;
 
@@ -80,6 +85,22 @@ public class LoginController {
 		
 	}
 	
+	@RequestMapping(value="/index")
+	public ModelAndView loadIndex(){
+		if(logger.isInfoEnabled()){
+			logger.info("=== load Submit Appeal page===" );
+		}
+		return new ModelAndView("index");
+	}
+	
+	@RequestMapping(value="/track")
+	public ModelAndView loadAllAppeals(){
+		if(logger.isInfoEnabled()){
+			logger.info("=== load Track Appeal page ===" );
+		}
+		return new ModelAndView("index");
+	}
+	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 		if(logger.isInfoEnabled()){
@@ -87,7 +108,23 @@ public class LoginController {
 		}
 		return "login";
 	}
-
+	
+	@RequestMapping(value="/findAllUsers", method = RequestMethod.GET)
+	public ResponseEntity<List<UserRepo>> findAllUsers (HttpServletRequest request, HttpServletResponse response) {
+		if(logger.isInfoEnabled()){
+			logger.info("=== logout requested ===" );
+		}
+		List<UserRepo> users = userService.getUser();
+		for (UserRepo user : users) {
+			if(logger.isInfoEnabled()){
+				logger.info("=== user name ===" + user.getUsername());
+				logger.info("=== password ===" + user.getPassword());
+				logger.info("=== email id ===" + user.getEmailAddress());
+			}
+		}
+		return new ResponseEntity<List<UserRepo>>(users, HttpStatus.OK);
+	}
+	
 	@PostConstruct
 	public void initIt() throws Exception {
 		if(logger.isInfoEnabled()){

@@ -2,7 +2,6 @@ package com.skysol.grievance.service;
 
 import java.util.List;
 
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +48,7 @@ public class UserServiceImpl implements UserService{
 		UserRepo user = null;
 		try{
 			user = new UserRepo();
-			user.setId(new Integer(1));
+//			user.setId(new AtomicLong().incrementAndGet());
 			user.setUsername("skysol");
 			user.setPassword("sky1234");
 			user.setEmailAddress("hr@skysolinc.com");
