@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +14,21 @@ import com.skysol.grievance.model.User;
 import com.skysol.grievance.model.mongo.UserRepo;
 
 @Service("userService")
+@Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Transactional
 public class UserServiceImpl implements UserService{
 
 	final static Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
+	private UserRepo user;
+	
 	@Autowired
 	private UserDao dao;
 
+	public void addUser(UserRepo user){
+		setUser(user);
+	}
+	
 	public User findById(int id) {
 		if(logger.isInfoEnabled()){
 			logger.info("=== UserServiceImpl findById ===" );
@@ -61,7 +70,7 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 	
-	public List<UserRepo> getUser(){
+	public List<UserRepo> getAllUsers(){
 		if(logger.isInfoEnabled()){
 			logger.info("=== UserDaoImpl getUser start ===");
 		}
@@ -76,6 +85,13 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
-	
+	public UserRepo getUser() {
+		return user;
+	}
 
+	public void setUser(UserRepo user) {
+		this.user = user;
+	}
+
+	
 }

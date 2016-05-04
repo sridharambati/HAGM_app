@@ -13,9 +13,13 @@ public interface UserService {
 	
 	public User findByUserName(String userName);
 	
+	public void addUser(UserRepo user);
+	
 	public boolean saveUser();
 	
-	public List<UserRepo> getUser();
+	public List<UserRepo> getAllUsers();
+	
+	public UserRepo getUser();
 	
 	
 }

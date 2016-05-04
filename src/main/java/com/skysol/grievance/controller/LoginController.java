@@ -46,8 +46,8 @@ public class LoginController {
 		}
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-//		username="skysol";
-//		password="sky1234";
+		username="skysol";
+		password="sky1234";
 		ModelAndView model = null;
 		User user = null;
 		try {
@@ -57,6 +57,11 @@ public class LoginController {
 				if(user != null){
 					if(username.equalsIgnoreCase(user.getUsername())
 							&& password.equalsIgnoreCase(user.getPassword())){
+						UserRepo userRepo = new UserRepo();
+						userRepo.setId(user.getId());
+						userRepo.setUsername(user.getUsername());
+						userRepo.setEmailAddress(user.getEmailAddress());
+						userService.addUser(userRepo);
 						model = new ModelAndView("index");
 						model.addObject("user", user);
 					}else{
@@ -93,19 +98,20 @@ public class LoginController {
 		return new ModelAndView("index");
 	}
 	
-	@RequestMapping(value="/track")
+	/*@RequestMapping(value="/track")
 	public ModelAndView loadAllAppeals(){
 		if(logger.isInfoEnabled()){
 			logger.info("=== load Track Appeal page ===" );
 		}
 		return new ModelAndView("index");
-	}
+	}*/
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 		if(logger.isInfoEnabled()){
 			logger.info("=== logout requested ===" );
 		}
+		userService.addUser(null);
 		return "login";
 	}
 	
@@ -114,13 +120,20 @@ public class LoginController {
 		if(logger.isInfoEnabled()){
 			logger.info("=== logout requested ===" );
 		}
-		List<UserRepo> users = userService.getUser();
-		for (UserRepo user : users) {
-			if(logger.isInfoEnabled()){
-				logger.info("=== user name ===" + user.getUsername());
-				logger.info("=== password ===" + user.getPassword());
-				logger.info("=== email id ===" + user.getEmailAddress());
+		List<UserRepo> users = null;
+		try {
+			users = userService.getAllUsers();
+			for (UserRepo user : users) {
+				if(logger.isInfoEnabled()){
+					logger.info("=== user name ===" + user.getUsername());
+					logger.info("=== password ===" + user.getPassword());
+					logger.info("=== email id ===" + user.getEmailAddress());
+				}
 			}
+		} catch (Exception e) {
+			logger.error("Exception occured while calling getUser ==", e);
+			ModelAndView model = new ModelAndView("error");
+			model.addObject("errMsg", "Please Configuare and Run Mongo DB!!");
 		}
 		return new ResponseEntity<List<UserRepo>>(users, HttpStatus.OK);
 	}
