@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,18 +37,18 @@ public class GrievanceController {
 		return "savegrievance";
 	}
 	
-	@RequestMapping(value = "/save")	
-	public  @ResponseBody String saveGrievance()   {
+	@RequestMapping(value = "/save", method = RequestMethod.POST)	
+	public  @ResponseBody String saveGrievance(Model model, @ModelAttribute("grievance") Grievance grievance)   {
 		if(logger.isInfoEnabled()){
 			logger.info("=== GrievanceController saveGrievance start===" );
 		}
-		ModelAndView model = null;
+//		ModelAndView model = null;
 		try {
 			grievanceService.saveGrievance();
 		} catch (Exception e) {
 			logger.error("Exception occured while saving grievance ==", e);
-			model = new ModelAndView("error");
-			model.addObject("errMsg", "Exception occured while saving grievance!!");
+//			model = new ModelAndView("error");
+			model.addAttribute("errMsg", "Exception occured while saving grievance!!");
 		}
 		if(logger.isInfoEnabled()){
 			logger.info("=== GrievanceController saveGrievance end===" );

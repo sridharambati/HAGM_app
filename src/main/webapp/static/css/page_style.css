@@ -238,7 +238,7 @@ h6 {
 }
 
 #templatemo_banner {
-	width: 890px;
+	width: 940px;
 	height: 110px;
 	margin: 0 auto;
 	padding: 2px 2px;
@@ -478,12 +478,14 @@ h6 {
 	padding: 20px 25px;
 	background: none;
 	text-align: center;
-	color: #CCCCCC;
+	color: #3a59c7;
+	/*color: #CCCCCC;*/
 }
 
 #templatemo_footer a {
 	font-weight: bold;
-	color: #CCCCCC;
+	color: #3a59c7;
+	/*color: #CCCCCC;*/
 }
 
 #templatemo_footer .footer_menu {
