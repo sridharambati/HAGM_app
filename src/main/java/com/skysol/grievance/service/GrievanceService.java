@@ -8,6 +8,6 @@ public interface GrievanceService {
 
 	public List<Grievance> getAllAppealsByUser();
 	
-	public void saveGrievance() throws Exception;
+	public void saveGrievance(Grievance grievance) throws Exception;
 	
 }

@@ -66,115 +66,108 @@
             <div class="cleaner"></div>
         </div>
         
-        <div class="section_w940" ng-hide="hide" ng-show="show">
+        <!-- <div class="section_w940" ng-hide="hide" ng-show="show"> -->
             
-             <!-- <div style="width: 848px;" >  -->
+             <div style="width: 888px;" ng-hide="hide" ng-show="show">  
              <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">Add New Appeal / Grievance </span></div>
               <div class="formcontainer">
-                   <form action="./grievance/save" method="post" modelAttribute="grievance" class="form-horizontal"> 
-                  <!-- <form name="grivanceForm" ng-submit="submitForm()" class="form-horizontal">-->
-                      <input type="hidden" ng-model="user.id" />
+                   <form ng-submit="submitGrievance()" name="grievanceForm" class="form-horizontal" method="post">
+                     <!--  <input type="hidden" ng-model="user.id" />
                       <input type="hidden" ng-model="user.username" />
-                      <input type="hidden" ng-model="user.emailAddress" />
-                      <!-- <div ng-controller = "appealController">
-                      	<table>
-                      		<tr>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Member ID</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.memberId" id="memberId" placeholder="Enter Member ID" required ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Member SSN</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.memberSSN" id="memberSSN" ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      		</tr>
-                      		<tr>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Member Name</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.memberName" id="memberName" ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Insurance Type</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.insuranceType" id="insuranceType" ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      		</tr>
-                      		<tr>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Grievance Type</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.grievanceType" id="grievanceType" ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      			<td>
-	                          		<div class="form-group col-md-12">
-		                              	<label class="col-md-2 control-lable" >Date</label>
-		                              	<div class="col-md-7">
-		                                  <input type="text" ng-model="grievance.requestedDate" id="requestedDate" ng-minlength="3"/>
-		                              	</div>
-	                          		</div>
-                      			</td>
-                      		</tr>
-                      	</table>
-                      </div> -->
-						<table>
-                      		<tr>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Member ID</label></td>
-		                              	<td>
-		                                  <input type="text" name="memberId" id="memberId" />
-                      			</td>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Member SSN</label> </td>
-		                                 <td> <input type="text" name="memberSSN" id="memberSSN" />
-                      			</td>
-                      		</tr>
-                      		<tr>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Member Name</label></td>
-		                                 <td> <input type="text" name="memberName" id="memberName" />
-                      			</td>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Insurance Type</label></td>
-		                                <td> <input type="text" name="insuranceType" id="insuranceType" />
-                      			</td>
-                      		</tr>
-                      		<tr>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Grievance Type</label></td>
-		                                 <td> <input type="text" name="grievanceType" id="grievanceType" />
-                      			</td>
-                      			<td>
-		                              	<label class="col-md-2 control-lable" >Date</label></td>
-		                                 <td> <input type="text" name="requestedDate" id="requestedDate" />
-                      			</td>
-                      		</tr>
-                      	</table>
+                      <input type="hidden" ng-model="user.emailAddress" /> -->
                       <div class="row">
-                          <div class="form-actions center">
-                              <input type="submit"  class="btn btn-primary btn-sm">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="memberid">Member ID</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.memberId" id="memberid" class="username form-control input-sm" />
+                              </div>
                           </div>
                       </div>
-                      <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
-							
+                        
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="ssn">SSN</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.memberSSN" id="ssn" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="name">Member Name</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.memberName" id="name" class="form-control input-sm" required/>
+                                  <!-- <div class="has-error" ng-show="provAppealForm.$dirty">
+                                      <span ng-show="provAppealForm.email.$error.required">This is a required field</span>
+                                      <span ng-show="provAppealForm.email.$invalid">This field is invalid </span>
+                                  </div> -->
+                              </div>
+                          </div>
+                      </div>
+                       <!-- <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="reqType">Insurance Type</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.insuranceType" id="reqType" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div> -->
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="reqType">Request Type</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.requestType" id="reqType" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="date">Date</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.requestedDate" id="date" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="email">Email Address</label>
+                              <div class="col-md-7">
+                                  <input type="email" ng-model="grievance.memberEmail" id="email" class="email form-control input-sm" required/>
+                                  <!-- <div class="has-error" ng-show="provAppealForm.$dirty">
+                                      <span ng-show="provAppealForm.email.$error.required">This is a required field</span>
+                                      <span ng-show="provAppealForm.email.$invalid">This field is invalid </span>
+                                  </div> -->
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="phone">Contact Phone</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="grievance.memberPhone" id="phone" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="comments">Comments</label>
+                              <div class="col-md-7">
+                                  <input type="textarea" ng-model="grievance.grievanceComments" id="comments" class="form-control input-sm" />
+                              </div>
+                          </div>
+                      </div>
+						<!--   <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />-->
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"   value="Add" class="btn btn-primary btn-sm" >
+                              <button type="button" ng-click="reset()" value="Reset" class="btn btn-warning btn-sm" >Reset Form</button>
+                          </div>
+                      </div>
+                     <%-- <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" /> --%>
                   </form>
               </div>
           </div>
@@ -193,22 +186,26 @@
 					<th>Member ID</th>
 					<th>Member SSN</th>
 					<th>Member Name</th>
-					<th>Insurance Type</th>
+					<th>Member Email</th>
 					<th>Grievance Type</th>
 					<th>Date</th>
+					<th>Phone</th>
+					<th>Comments</th>
 					<th>Status</th>
 				</tr>
 				<tr ng-repeat= "appeal in appeals">
 					<td>{{appeal.memberId}}</td>
 					<td>{{appeal.memberSSN}}</td>
 					<td>{{appeal.memberName}}</td>
-					<td>{{appeal.insuranceType}}</td>
-					<td>{{appeal.grievanceType}}</td>
+					<td>{{appeal.memberEmail}}</td>
+					<td>{{appeal.requestType}}</td>
 					<td>{{appeal.requestedDate}}</td>
+					<td>{{appeal.memberPhone}}</td>
+					<td>{{appeal.grievanceComments}}</td>
 					<td>{{appeal.status}}</td>
-					<input type="hidden" ng-model="appeal.user.id" />
+					<!-- <input type="hidden" ng-model="appeal.user.id" />
                     <input type="hidden" ng-model="appeal.user.username" />
-                    <input type="hidden" ng-model="appeal.user.emailAddress" />
+                    <input type="hidden" ng-model="appeal.user.emailAddress" /> -->
 				</tr>
 			</table>
 		</div>

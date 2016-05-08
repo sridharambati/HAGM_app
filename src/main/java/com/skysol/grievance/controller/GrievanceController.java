@@ -15,10 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.skysol.grievance.model.mongo.Grievance;
 import com.skysol.grievance.service.GrievanceService;
@@ -37,23 +39,19 @@ public class GrievanceController {
 		return "savegrievance";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)	
-	public  @ResponseBody String saveGrievance(Model model, @ModelAttribute("grievance") Grievance grievance)   {
+	@RequestMapping(value="/saveGrievance", method=RequestMethod.POST)
+	public ResponseEntity<Void> saveGrievance(@RequestBody Grievance grievance, UriComponentsBuilder ucBuilder) {
 		if(logger.isInfoEnabled()){
-			logger.info("=== GrievanceController saveGrievance start===" );
+			logger.info("=== save Grievance controller ===" );
 		}
-//		ModelAndView model = null;
+		logger.info("grievance details"+grievance);
 		try {
-			grievanceService.saveGrievance();
+			grievanceService.saveGrievance(grievance);
 		} catch (Exception e) {
 			logger.error("Exception occured while saving grievance ==", e);
-//			model = new ModelAndView("error");
-			model.addAttribute("errMsg", "Exception occured while saving grievance!!");
 		}
-		if(logger.isInfoEnabled()){
-			logger.info("=== GrievanceController saveGrievance end===" );
-		}
-		return "track";
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+		
 	}
 	
 	@RequestMapping(value = "/track")

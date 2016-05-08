@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Grievance {
 	
-	@Id
-	private int id;
+//	@Id
+//	private int id;
 	
 	private Integer memberId;
 	
@@ -19,21 +19,27 @@ public class Grievance {
 	
 	private String insuranceType;
 	
-	private String grievanceType;
+	private String requestType;
 	
 	private Date requestedDate;
+	
+	private String memberEmail;
+	
+	private String memberPhone;
+	
+	private String grievanceComments;
 	
 	private String status;
 	
 	private UserRepo user;
 
-	public Integer getId() {
+	/*public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+	}*/
 
 	public Integer getMemberId() {
 		return memberId;
@@ -67,12 +73,12 @@ public class Grievance {
 		this.insuranceType = insuranceType;
 	}
 
-	public String getGrievanceType() {
-		return grievanceType;
+	public String getRequestType() {
+		return requestType;
 	}
 
-	public void setGrievanceType(String grievanceType) {
-		this.grievanceType = grievanceType;
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
 	}
 
 	public Date getRequestedDate() {
@@ -81,6 +87,30 @@ public class Grievance {
 
 	public void setRequestedDate(Date requestedDate) {
 		this.requestedDate = requestedDate;
+	}
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
+
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+	public String getGrievanceComments() {
+		return grievanceComments;
+	}
+
+	public void setGrievanceComments(String grievanceComments) {
+		this.grievanceComments = grievanceComments;
 	}
 
 	public String getStatus() {

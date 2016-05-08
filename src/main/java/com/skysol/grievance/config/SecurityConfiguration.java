@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		 .and()
 		.formLogin().loginPage("/login").successHandler(customSuccessHandler)
         .usernameParameter("username").passwordParameter("password")
-		.and().csrf();
+		.and().csrf().disable();
         //.and().exceptionHandling().accessDeniedPage("/Access_Denied");
 		if(logger.isDebugEnabled()){
 			logger.debug("=== SecurityConfiguration configure Ends ===");

@@ -46,18 +46,11 @@ public class GrievanceServiceImpl implements GrievanceService{
 		return appeals;
 	}
 	
-	public void saveGrievance() throws Exception{
+	public void saveGrievance(Grievance grievance) throws Exception{
 		if(logger.isInfoEnabled()){
 			logger.info("=== GrievanceServiceImpl saveGrievance start ===");
 		}
-		Grievance grievance  = new Grievance();
-		grievance.setMemberId(new Integer(11111));
-		grievance.setMemberSSN(new Long(1231231234));
-		grievance.setMemberName("skysol");
-		grievance.setInsuranceType("Full Coverage");
-		grievance.setGrievanceType("Complaint");
-		grievance.setRequestedDate(new Date());
-		grievance.setStatus("Requested");
+		grievance.setStatus("Submitted");
 		grievance.setUser(userService.getUser());
 		grievanceDao.saveGrievance(grievance);
 		if(logger.isInfoEnabled()){

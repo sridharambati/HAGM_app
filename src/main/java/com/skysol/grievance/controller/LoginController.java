@@ -62,7 +62,7 @@ public class LoginController {
 						userRepo.setUsername(user.getUsername());
 						userRepo.setEmailAddress(user.getEmailAddress());
 						userService.addUser(userRepo);
-						model = new ModelAndView("index");
+						model = new ModelAndView("grievancepage");
 						model.addObject("user", user);
 					}else{
 						model = new ModelAndView("error");

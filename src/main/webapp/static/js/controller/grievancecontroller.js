@@ -1,7 +1,7 @@
 var hagm = angular.module('hagmapp', []);
 hagm.controller('grievanceController', function($scope, $http){
 	$scope.hide = true;
-	$scope.grievance = {};
+	//$scope.grievance = {};
 	$scope.showAllGrievance = function(){
 		$http.get('http://localhost:8080/HAGM_app/grievance/findAppealsByUser')
 		.success(function(response){
@@ -22,17 +22,14 @@ hagm.controller('grievanceController', function($scope, $http){
 		$scope.showAllGrievance();
 	}
 	
-	$scope.submitForm = function() {
-        $http.post({
-        		method : 'POST', 
-        		url : 'http://localhost:8080/HAGM_app/grievance/save', 
-        		data : $scope.grievance,
-        		headers : {'Content-Type':'application/x-www-form-urlencoded'}
-        })
-        .success(function(data, status) {
-            $scope.appeal = data;
-        });
-    }  
+	$scope.submitGrievance=function(){
+		console.log("entered into ajngular controller");
+		console.log(" member Id - "+$scope.grievance.memberId);
+		 $http.post('http://localhost:8080/HAGM_app/grievance/saveGrievance',$scope.grievance)
+		 .success(function(response){
+			alert("Grievance Submitted Successfully!!"); 
+		 });
+	};
 	
 });
 
