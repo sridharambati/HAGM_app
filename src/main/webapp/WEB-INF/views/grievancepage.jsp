@@ -11,7 +11,7 @@
 <div class="generic-container" ng-controller="grievanceController">
 	<!-- <div id="templatemo_banner_wrapper"> -->
 	    <div id="templatemo_banner">
-	    	<div id="banner_content" >
+	    	<div id="banner_content">
 				<table width="100%" border="0" celpadding="0" cellspacing="0">
 					<tr>
 						<td width="50%"  align="left"><img height="105" src="./static/images/help.png"/></td>
@@ -80,7 +80,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="memberid">Member ID</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.memberId" id="memberid" class="username form-control input-sm" />
+                                  <input type="text" ng-model="grievance.memberId" id="memberid" class="username form-control input-sm" required />
                               </div>
                           </div>
                       </div>
@@ -90,7 +90,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="ssn">SSN</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.memberSSN" id="ssn" class="form-control input-sm" />
+                                  <input type="number" ng-model="grievance.memberSSN" id="ssn" class="form-control input-sm" required/>
                               </div>
                           </div>
                       </div>
@@ -111,7 +111,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="reqType">Insurance Type</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.insuranceType" id="reqType" class="form-control input-sm" />
+                                  <input type="text" ng-model="grievance.insuranceType" id="reqType" class="form-control input-sm" required/>
                               </div>
                           </div>
                       </div> -->
@@ -119,7 +119,13 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="reqType">Request Type</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.requestType" id="reqType" class="form-control input-sm" />
+                                  <select ng-model="grievance.requestType" id="reqType" class="form-control input-sm" required>
+    								<option value="">
+    								<option>Appeal</option>
+    								<option>Grievance</option>
+    								<option>Other</option>
+ 								 </select>
+                                 <!--  <input type="text" ng-model="grievance.requestType" id="reqType" class="form-control input-sm" /> -->
                               </div>
                           </div>
                       </div>
@@ -128,7 +134,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="date">Date</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.requestedDate" id="date" class="form-control input-sm" />
+                                  <input type="date" ng-model="grievance.requestedDate" id="date" class="form-control input-sm" required/>
                               </div>
                           </div>
                       </div>
@@ -148,7 +154,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="phone">Contact Phone</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="grievance.memberPhone" id="phone" class="form-control input-sm" />
+                                  <input type="number" maxlength="10" ng-model="grievance.memberPhone" id="phone" class="form-control input-sm" />
                               </div>
                           </div>
                       </div>
@@ -156,7 +162,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="comments">Comments</label>
                               <div class="col-md-7">
-                                  <input type="textarea" ng-model="grievance.grievanceComments" id="comments" class="form-control input-sm" />
+                                  <textarea ng-model="grievance.grievanceComments" id="comments" class="form-control input-sm" required/></textarea>
                               </div>
                           </div>
                       </div>
@@ -177,10 +183,10 @@
             <div class="cleaner"></div>
         </div>
         
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-hide="show" ng-show="hide">
 		<!-- Default panel contents -->
-	    <div class="panel-heading"><span class="lead"> Appeals / Grievances </span></div>
-		<div class="tablecontainer">
+	    <div class="panel-heading" ><span class="lead"> Appeals / Grievances </span></div>
+		<div class="tablecontainer" >
 			<table cellpadding="2" cellspacing="2" border="1" class="table table-striped table-bordered table-condensed table-hover">
 				<tr>
 					<th>Member ID</th>
