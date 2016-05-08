@@ -46,8 +46,8 @@ public class LoginController {
 		}
 		String username=request.getParameter("username");
 		String password=request.getParameter("password");
-		username="skysol";
-		password="sky1234";
+//		username="skysol";
+//		password="sky1234";
 		ModelAndView model = null;
 		User user = null;
 		try {
